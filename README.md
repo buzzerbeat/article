@@ -2,6 +2,49 @@
 ## 文章推荐API
 
 
+### 推荐列表API
+
+
+      [
+        {
+            "sid": "O4EcMkUs8Yw", //推荐Item sid
+            "relSid": "aAwsokgc87O", //关联资源sid
+            "type": 1, //type取值：1为普通新闻，2为图集新闻，3为视频新闻/实时，后续支持(视频/精选，广告等类型)
+            "style": 0,  //style表示列表样式：0为默认(根据coverList的数量来)，1为单图(3张缩略图)，2为无图，3为多图
+            "title": "杨幂发错国旗秒删 重新发了一条微博遭吐槽",
+            "abstract": "【 摘要 】杨幂发错国旗，昨天七夕，杨幂没晒出和刘恺威的合照也没晒七夕礼物。而是为中国奥运健儿加油但遭到网友炮轰:连国旗都能发错!随即杨幂秒删该微博。重新发了一条微博，除了国旗换了，别的都没换!看来是发现了!而是为中国奥运健儿加油但遭到网友炮轰:连国旗都能发错!",
+            "pub_time": 1470820424,
+            "source": "行乐视觉",
+            "link": "http://m.jiangsu.china.com.cn/mobile/ent/yldt/6886353_1.html",
+            "coverList": [
+                {
+                    "sid": "JmZAbOtfx8L",
+                    "index": 0,
+                    "img": {
+                        "width": 550,
+                        "height": 370,
+                        "mime": "image/jpeg",
+                        "md5": "f8ff128d7311536c04fc7b0057d0a1b3",
+                        "size": 24686,
+                        "dynamic": 0,
+                        "sid": "O4EcMkrxSYw",
+                        "dotExt": ".jpg"
+                    },
+                    "tt_uri": "large/c050004c79e14cf418d",
+                    "sub_title": "",
+                    "sub_abstract": ""
+                },
+               ...
+            ],
+              "is_hot": 0/1	//是否为热门
+              "behot_time": //热门资源排序用
+              "is_stick": 0/1 //是否置顶
+              "label": //列表item角标
+        }
+      ]
+
+
+
 ### 文章详情API
 
 
