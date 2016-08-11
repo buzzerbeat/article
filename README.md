@@ -2,7 +2,7 @@
 ## 文章推荐API
 
 
-### 推荐列表API
+### 推荐列表API `/news`
 
 
       [
@@ -45,14 +45,17 @@
 
 
 
-### 文章详情API
+### 文章详情API `/articles`
 
+可选参数(expands)：
+* content: 原始content
+* appContent: 用于app展示使用; appContent中的<img_sid/>作为替换的标签存在，需要app中对标签的替换为images中对应sid的图片。（将来可以扩充标签<video_sid/><album_sid/>作为视频，图集等资源插入新闻中）
+* webContent: 用于后台展示用
 
-appContent中的<img_sid/>作为替换的标签存在，需要app中对标签的替换为images中对应sid的图片。（将来可以扩充标签<video_sid/><album_sid/>作为视频，图集等资源插入新闻中）：
 
 
       {
-          "item": {   //由type决定item结构，示例是新闻类型，后续支持视频，推广，问答，专题等。
+         
               "sid": "EKo2Ipy6Mq4",
               "title": "吕斌拳台遭遇不公平判罚，邹市明：里约奥运会不是毁人嘛！",
               "abstract": "北京时间8月9日，2016年里约奥运会结束了第4个比赛日的争夺，中国军团收获颇丰。但是，在拳击赛场上，却发生了一件让人非常遗憾又有些愤怒的事情，中国拳击手吕斌在全场占尽优势的情况下被裁判判罚失败。赛后吕斌哭着吻别拳击场的画面让人惋惜、愤怒！",
@@ -118,43 +121,37 @@ appContent中的<img_sid/>作为替换的标签存在，需要app中对标签的
                   "create_time": 1470223877
               },
               
-          }
           
-          "type": 1, //type取值：1为普通新闻，2为图集新闻，3为视频新闻/实时，后续支持(视频/精选，广告等类型)
-          "style": 0,  //style表示列表样式：0为默认(根据coverList的数量来)，1为单图(3张缩略图)，2为无图，3为多图
-          "coverList": [  //列表item样式的缩略图列表
-              {
-                  "sid": "JmZAbOsox8L",
-                  "index": 0,
-                  "img": {
-                      "width": 172,
-                      "height": 120,
-                      "mime": "image/jpeg",
-                      "md5": "90790814235b1ec7138be6cd8317a56e",
-                      "size": 3944,
-                      "dynamic": 0,
-                      "sid": "zcV8LKHo5Ov",
-                      "dotExt": ".jpg"
-                  },
-                  "tt_uri": "list/78f001f32e607d80f00",
-                  "sub_title": "",
-                  "sub_abstract": ""
-              }
-           ],
-           "tags": [ //对应关键词
-              {
-                  "sid": "uMwgBg0Mwg0",
-                  "name": "中国军团"
-              },
-             ...
-           ],
-           
-           "pub_time": 1470751269, //发布时间，普通资源排序用
-           "is_hot": 0/1	//是否为热门
-           "behot_time": //热门资源排序用
-           "is_stick": 0/1 //是否置顶
-           "be_stick_time":  //置顶开始时间
-           "off_stick_time": //置顶结束时间
-           "label": //列表item角标
+          
+                "type": 1, //type取值：1为普通新闻，2为图集新闻，3为视频新闻/实时，后续支持(视频/精选，广告等类型)
+                "style": 0,  //style表示列表样式：0为默认(根据coverList的数量来)，1为单图(3张缩略图)，2为无图，3为多图
+                "coverList": [  //列表item样式的缩略图列表
+                    {
+                        "sid": "JmZAbOsox8L",
+                        "index": 0,
+                        "img": {
+                            "width": 172,
+                            "height": 120,
+                            "mime": "image/jpeg",
+                            "md5": "90790814235b1ec7138be6cd8317a56e",
+                            "size": 3944,
+                            "dynamic": 0,
+                            "sid": "zcV8LKHo5Ov",
+                            "dotExt": ".jpg"
+                        },
+                        "tt_uri": "list/78f001f32e607d80f00",
+                        "sub_title": "",
+                        "sub_abstract": ""
+                    }
+                 ],
+                 "tags": [ //对应关键词
+                    {
+                        "sid": "uMwgBg0Mwg0",
+                        "name": "中国军团"
+                    },
+                   ...
+                 ],
+
+
            
       }
