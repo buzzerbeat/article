@@ -9,7 +9,6 @@ use Yii;
 /**
  * This is the model class for table "tt_article_video".
  *
- * @property integer $id
  * @property string $tt_video_id
  * @property integer $video_id
  * @property integer $article_id
@@ -51,7 +50,6 @@ class TtArticleVideo extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
             'tt_video_id' => 'Tt Video ID',
             'video_id' => 'Video ID',
             'article_id' => 'Article ID',
@@ -60,7 +58,7 @@ class TtArticleVideo extends \yii\db\ActiveRecord
     }
 
     public function getSid() {
-        return Utility::sid($this->id);
+        return Utility::sid($this->video_id);
     }
     public function getVideo() {
         return $this->hasOne(Video::className(), ['id'=>'video_id']);
@@ -68,10 +66,7 @@ class TtArticleVideo extends \yii\db\ActiveRecord
     public function fields()
     {
         $fields = [
-            'sid',
             'video',
-            'create_time',
-          
         ];
         return $fields;
     }

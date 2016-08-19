@@ -9,6 +9,7 @@
 namespace article\controllers;
 
 
+use article\models\NewsItem;
 use article\models\TtArticle;
 use common\components\Utility;
 use common\models\Article;
@@ -17,7 +18,7 @@ use yii\rest\Controller;
 use yii\data\ActiveDataProvider;
 use yii\web\Response;
 
-class ArticleController extends Controller
+class NewsController extends Controller
 {
 
 
@@ -39,7 +40,7 @@ class ArticleController extends Controller
     {
         $request = \Yii::$app->request;
         $type = $request->get("type", 0);
-        $query = Article::find();
+        $query = NewsItem::find();
         if ($type) {
             $query->where(['type'=>$type]);
         }
@@ -49,8 +50,8 @@ class ArticleController extends Controller
     }
 
 
-    public function actionView($sid)
+    public function actionView($id)
     {
-        return Article::findOne(Utility::id($sid));
+        return NewsItem::findOne($id);
     }
 }

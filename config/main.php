@@ -38,7 +38,8 @@ return [
             'showScriptName' => false,
             'rules' => [
                     ['class' => 'yii\rest\UrlRule', 'controller' => 'article'],
-//                    'GET,HEAD articles/<sid>' => 'article/view',
+                    ['class' => 'yii\rest\UrlRule', 'controller' => 'news'],
+                    'GET,HEAD articles/<sid>' => 'article/view',
             ],
         ],
     ],

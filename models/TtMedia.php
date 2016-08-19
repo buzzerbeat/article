@@ -3,6 +3,7 @@
 namespace article\models;
 
 use common\components\Utility;
+use common\models\Image;
 use Yii;
 
 /**
@@ -66,10 +67,10 @@ class TtMedia extends \yii\db\ActiveRecord
     public function fields()
     {
         $fields = [
-            'sid',
             'name',
-            'avatar',
-            'description',
+            'avatar'=>function($model) {
+                return Image::findOne($model->avatar);
+            },
         ];
         return $fields;
     }

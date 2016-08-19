@@ -9,12 +9,11 @@ use Yii;
 /**
  * This is the model class for table "tt_article_image".
  *
- * @property integer $id
+ * @property integer $image_id
  * @property integer $tt_article_id
  * @property string $sub_title
  * @property string $sub_abstract
  * @property integer $index
- * @property integer $image
  * @property string $tt_uri
  * @property integer $is_thumb
  * @property integer $mode
@@ -46,8 +45,8 @@ class TtArticleImage extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [[ 'image', 'tt_uri'], 'required'],
-            [[ 'tt_article_id', 'index', 'image', 'mode', 'is_thumb'], 'integer'],
+            [[ 'image_id',  'tt_uri'], 'required'],
+            [[ 'image_id', 'tt_article_id', 'index',  'mode', 'is_thumb'], 'integer'],
             [['tt_uri'], 'string', 'max' => 1024],
             [['sub_title', 'sub_abstract'], 'string'],
         ];
@@ -59,10 +58,9 @@ class TtArticleImage extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
+            'image_id' => 'Image ID',
             'tt_article_id' => 'Tt Article ID',
             'index' => 'Index',
-            'image' => 'Image',
             'tt_uri' => 'Tt Uri',
             'sub_title' => 'Sub Title',
             'sub_abstract' => 'Sub Abstract',
@@ -71,7 +69,7 @@ class TtArticleImage extends \yii\db\ActiveRecord
         ];
     }
     public function getImg() {
-        return $this->hasOne(Image::className(), ['id' => 'image']);
+        return $this->hasOne(Image::className(), ['id' => 'image_id']);
     }
     public function getSid() {
         return Utility::sid($this->id);
@@ -80,12 +78,10 @@ class TtArticleImage extends \yii\db\ActiveRecord
     public function fields()
     {
         $fields = [
-            'sid',
             'index',
-            'img',
+            'image'=>'img',
             'tt_uri',
             'sub_title',
-
             'sub_abstract',
         ];
         return $fields;

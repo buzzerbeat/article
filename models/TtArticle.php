@@ -22,13 +22,37 @@ use Yii;
  * @property string $label
  * @property integer $bestick_time
  * @property integer $off_stick_time
+ * @property Article $article
  */
 class TtArticle extends \yii\db\ActiveRecord
 {
-    const TYPE_VIDEO = 2;
+
     const TYPE_ARTICLE = 1;
+    const TYPE_GALLERY = 2;
+    const TYPE_VIDEO = 3;
+    const TYPE_AD = 5;
+    const TYPE_WEB_VIEW = 6;
     const STYLE_DEFAULT = 0;
-    const TYPE_GALLERY = 3;
+    const STYLE_MULTI_THUMBS = 3;
+    const STYLE_LARGE_THUMB = 11;
+    const STYLE_THUMB = 1;
+    const STYLE_NO_THUMB = 2;
+
+    const TYPE_DICT = [
+        self::TYPE_ARTICLE => "新闻",
+        self::TYPE_GALLERY => "图片",
+        self::TYPE_VIDEO => "视频",
+        self::TYPE_AD => "推广",
+        self::TYPE_WEB_VIEW => "链接",
+    ];
+
+    const STYLE_DICT = [
+        self::STYLE_DEFAULT => "默认",
+        self::STYLE_THUMB => "单图",
+        self::STYLE_NO_THUMB => "无图",
+        self::STYLE_LARGE_THUMB => "大图",
+        self::STYLE_MULTI_THUMBS => "多图",
+    ];
 
     /**
      * @inheritdoc
@@ -45,10 +69,7 @@ class TtArticle extends \yii\db\ActiveRecord
     {
         return Yii::$app->get('atDb');
     }
-
-
-
-
+    
 
     /**
      * @inheritdoc
@@ -57,8 +78,8 @@ class TtArticle extends \yii\db\ActiveRecord
     {
         return [
             [['article_id'], 'required'],
-            [['article_id', 'type', 'style', 'wenda_info', 'media_id', 'is_hot', 'behot_time', 'is_stick', 'bestick_time', 'off_stick_time'], 'integer'],
-            [['cover_ids', 'label'], 'string', 'max' => 64],
+            [['article_id', 'type', 'style', 'media_id'], 'integer'],
+            [['cover_ids'], 'string', 'max' => 64],
         ];
     }
 
@@ -71,15 +92,8 @@ class TtArticle extends \yii\db\ActiveRecord
             'article_id' => 'Article ID',
             'type' => 'Type',
             'style' => 'Style',
-            'wenda_info' => 'Wenda Info',
             'media_id' => 'Media ID',
             'cover_ids' => 'Cover Ids',
-            'is_hot' => 'Is Hot',
-            'behot_time' => 'Behot Time',
-            'is_stick' => 'Is Stick',
-            'label' => 'Label',
-            'bestick_time' => 'Bestick Time',
-            'off_stick_time' => 'Off Stick Time',
         ];
     }
 
@@ -99,15 +113,7 @@ class TtArticle extends \yii\db\ActiveRecord
         return Utility::sid($this->article_id);
     }
 
-    public function getCoverList() {
-        $coverIds = explode(',', $this->cover_ids);
-        if (!empty($this->cover_ids)) {
-            return Image::find()->where(['in', 'id', $coverIds])->all();
-        }
-        return null;
-    }
 
-   
 
     public function fields()
     {
