@@ -1,8 +1,101 @@
 # article
+## 推荐样式说明
+
+#### type表示新闻类型，取值说明
+
+
+* type=1，新闻；默认样式，根据style和其他信息组合展示
+
+![Image](https://github.com/buzzerbeat/article/blob/master/web/images/style_multi_pics.png?raw=true)
+
+* type=2，图集新闻；需要特殊处理的样式包含：
+	* 在从左数第一张图(有可能是三图，也有可能是大图)的左下标注图集图片数量(n图)，如下图：
+
+![Image](https://github.com/buzzerbeat/article/blob/master/web/images/type_multi_pics_2.png?raw=true)
+
+* type=3，视频新闻；结构中包含video_info，需要特殊处理的样式包含：
+	* 视频时长 
+	* 播放按钮(style=1或11时，样式略有不同，见下图)
+
+![Image](https://github.com/buzzerbeat/article/blob/master/web/images/type_video_large_image.png?raw=true)
+![Image](https://github.com/buzzerbeat/article/blob/master/web/images/type_video.png?raw=true)
+
+
+* type=5，推广，广告；需要特殊处理的样式包含：
+	* label的颜色为蓝色，与其他label颜色区别开
+
+![Image](https://github.com/buzzerbeat/article/blob/master/web/images/type_ad.png?raw=true)
+
+
+* type=6，webview
+
+
+#### style表示列表样式，取值说明
+
+* style=1，单图样式，建议尺寸300\*196
+
+![Image](https://github.com/buzzerbeat/article/blob/master/web/images/type_default_hot.png?raw=true)
+
+* style=11，大图(单图)样式，建议尺寸580\*326
+
+![Image](https://github.com/buzzerbeat/article/blob/master/web/images/type_video_large_image.png?raw=true)
+
+* style=2，无图新闻
+
+![Image](https://github.com/buzzerbeat/article/blob/master/web/images/style_no_pic.png?raw=true)
+
+* style=3，多图（三图）新闻，建议尺寸300\*196
+
+![Image](https://github.com/buzzerbeat/article/blob/master/web/images/style_multi_pics.png?raw=true)
+
+
+#### 其他决定样式字段说明
+
+* title，标题
+* coverList，缩略图列表，存储对应style需要用到的图片数据的列表
+* relSid，关联资源的sid，type=[1,2]时，sid为新闻接口的sid，type=3时，sid为视频接口的sid，type=[5,6]时，sid为空
+* media，文章来源媒体，null不显示
+	* avatar：头像图片，null表示没有媒体头像
+	* name：媒体名称
+
+![Image](https://github.com/buzzerbeat/article/blob/master/web/images/media_info.png?raw=true)
+
+* pubTime，发表时间，null不显示
+
+![Image](https://github.com/buzzerbeat/article/blob/master/web/images/elapsed.png?raw=true)
+
+
+* label，标签，null或空不显示(多个标签用逗号分隔，可同时显示多个标签，例如“热，图片”)
+
+![Image](https://github.com/buzzerbeat/article/blob/master/web/images/label1.png?raw=true)
+
+* like_count，赞，null或0时不显示
+
+![Image](https://github.com/buzzerbeat/article/blob/master/web/images/like.png?raw=true)
+
+
+* comment_count，赞，null或0时不显示
+
+![Image](https://github.com/buzzerbeat/article/blob/master/web/images/comment.png?raw=true)
+
+
+* can_delete，是否可以删除
+
+![Image](https://github.com/buzzerbeat/article/blob/master/web/images/delete.png?raw=true)
+
+* image_count，图集的图片数量
+
+![Image](https://github.com/buzzerbeat/article/blob/master/web/images/image_count.png?raw=true)
+
+
+* video_info，视频数据，可选
+
+
+
+
 ## 文章推荐API
 
-
-### 推荐列表API `/news`
+### 推荐列表API `news`
 
 
       [
@@ -13,36 +106,66 @@
             "style": 0,  //style表示列表样式：0为默认(根据coverList的数量来)，1为单图(3张缩略图)，2为无图，3为多图
             "title": "杨幂发错国旗秒删 重新发了一条微博遭吐槽",
             "abstract": "【 摘要 】杨幂发错国旗，昨天七夕，杨幂没晒出和刘恺威的合照也没晒七夕礼物。而是为中国奥运健儿加油但遭到网友炮轰:连国旗都能发错!随即杨幂秒删该微博。重新发了一条微博，除了国旗换了，别的都没换!看来是发现了!而是为中国奥运健儿加油但遭到网友炮轰:连国旗都能发错!",
-            "pub_time": 1470820424,
+            "pubTime": "刚刚",
+            "media": {
+                  "name": "东方体育日报",
+                  "avatar": "EKo2ImD6Mq4",
+              },
             "source": "行乐视觉",
             "link": "http://m.jiangsu.china.com.cn/mobile/ent/yldt/6886353_1.html",
             "coverList": [
                 {
-                    "sid": "JmZAbOtfx8L",
-                    "index": 0,
-                    "img": {
-                        "width": 550,
-                        "height": 370,
-                        "mime": "image/jpeg",
-                        "md5": "f8ff128d7311536c04fc7b0057d0a1b3",
-                        "size": 24686,
-                        "dynamic": 0,
-                        "sid": "O4EcMkrxSYw",
-                        "dotExt": ".jpg"
-                    },
-                    "tt_uri": "large/c050004c79e14cf418d",
-                    "sub_title": "",
-                    "sub_abstract": ""
+                    "width": 550,
+                    "height": 370,
+                    "mime": "image/jpeg",
+                    "md5": "f8ff128d7311536c04fc7b0057d0a1b3",
+                    "size": 24686,
+                    "dynamic": 0,
+                    "sid": "O4EcMkrxSYw",
+                    "dotExt": ".jpg"
+                    
                 },
                ...
             ],
-              "is_hot": 0/1	//是否为热门
-              "behot_time": //热门资源排序用
-              "is_stick": 0/1 //是否置顶
-              "label": //列表item角标
+            "is_hot": 0/1	
+            "behot_time": 
+            "is_stick": 0/1 //是否置顶
+            "label": //列表item角标
+            "like_count":0,
+            "comment_count":0,
+            "can_delete":0/1,
+            "image_count":0,
+           
+            *"video_info": {
+                      "sid": "EKo2K2v6Mq4",
+                      "coverImg": {
+                          "width": 580,
+                          "height": 326,
+                          "mime": "image/jpeg",
+                          "md5": "76033cd6ec615c9c63c036f84958e929",
+                          "size": 19467,
+                          "dynamic": 0,
+                          "sid": "uM2org0Mwg0",
+                          "dotExt": ".jpg"
+                      },
+                      "length": 210,
+                      "width": 640,
+                      "height": 360,
+                      "size": 0,
+                      "url": "http://v7.pstatp.com/1ed001aef338ec09d056fcf1f757f358/57a9be38/video/c/c5299d0cc2bf4efa97a65bae59ded2c4/",
+                      "m3u8_url": "",
+                      "site_url": "http://toutiao.com/group/6314563472730358273/",
+                      "regexSetting": {
+                          "type": 3,
+                          "site": "toutiao",
+                          "app_req_url": "http://i.snssdk.com/video/urls/1/toutiao/mp4/3e44b0eb348548d688a05e71c2c2fad5?callback=tt__video__9vp4me",
+                          "pattern": "data &gt; video_list &gt; video_1 &gt; main_url",
+                          "matches_index": "",
+                          "headers": ""
+                      }
+                  },
         }
       ]
-
 
 
 ### 文章详情API `/articles`
