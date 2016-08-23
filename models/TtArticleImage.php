@@ -72,7 +72,7 @@ class TtArticleImage extends \yii\db\ActiveRecord
         return $this->hasOne(Image::className(), ['id' => 'image_id']);
     }
     public function getSid() {
-        return Utility::sid($this->id);
+        return Utility::sid($this->image_id);
     }
 
     public function fields()
