@@ -13,6 +13,7 @@ use Yii;
  * @property integer $read_count
  * @property integer $bury_count
  * @property integer $dig_count
+ * @property integer $fav_count
  */
 class TtArticleCount extends \yii\db\ActiveRecord
 {
@@ -39,7 +40,7 @@ class TtArticleCount extends \yii\db\ActiveRecord
     {
         return [
             [['article_id'], 'required'],
-            [['article_id', 'like_count', 'comment_count', 'read_count', 'bury_count', 'dig_count'], 'integer'],
+            [['article_id', 'like_count', 'comment_count', 'read_count', 'bury_count', 'dig_count', 'fav_count'], 'integer'],
         ];
     }
 
@@ -55,6 +56,7 @@ class TtArticleCount extends \yii\db\ActiveRecord
             'read_count' => 'Read Count',
             'bury_count' => 'Bury Count',
             'dig_count' => 'Dig Count',
+            'fav_count' => 'Fav Count',
         ];
     }
 
@@ -67,6 +69,7 @@ class TtArticleCount extends \yii\db\ActiveRecord
             'read_count',
             'bury_count',
             'dig_count',
+            'fav_count',
         ];
         return $fields;
     }
