@@ -9,6 +9,7 @@
 namespace article\controllers;
 
 
+use article\models\NewsItem;
 use article\models\TtArticle;
 use common\components\Utility;
 use common\models\Article;
@@ -74,9 +75,9 @@ class ArticleController extends Controller
             ->where([
                 '`tt_article_fav`.`user_id`' => $user->id,
             ])->select("`tt_article`.article_id")->asArray()->column();
-        $query = Article::find()->where(['in', 'id', $idArr]);
+        $query = NewsItem::find()->where(['in', 'relation_id', $idArr]);
         if (!empty($idArr)) {
-            $query = $query->orderBy([new Expression('FIELD (id, ' . implode(',' , $idArr) .')')]);
+            $query = $query->orderBy([new Expression('FIELD (relation_id, ' . implode(',' , $idArr) .')')]);
         }
         return new ActiveDataProvider([
             'query' => $query
@@ -91,9 +92,9 @@ class ArticleController extends Controller
                 '`tt_article_like`.`user_id`' => $user->id,
             ])
             ->select("`tt_article`.article_id")->asArray()->column();
-        $query = Article::find()->where(['in', 'id', $idArr]);
+        $query = NewsItem::find()->where(['in', 'relation_id', $idArr]);
         if (!empty($idArr)) {
-            $query = $query->orderBy([new Expression('FIELD (id, ' . implode(',' , $idArr) .')')]);
+            $query = $query->orderBy([new Expression('FIELD (relation_id, ' . implode(',' , $idArr) .')')]);
         }
         return new ActiveDataProvider([
             'query' => $query
