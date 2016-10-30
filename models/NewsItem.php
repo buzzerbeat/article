@@ -151,7 +151,7 @@ class NewsItem extends \yii\db\ActiveRecord
     }
     public function getImageCount() {
         if ($this->type == TtArticle::TYPE_GALLERY) {
-            return TtArticleImage::find()->where(['tt_article_id'=>$this->relation_id])->count();
+            return TtArticleImage::find()->where(['tt_article_id'=>$this->relation_id,'is_thumb'=>0])->count();
         }
         return null;
     }

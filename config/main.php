@@ -12,6 +12,9 @@ return [
     'bootstrap' => ['log'],
     'controllerNamespace' => 'article\controllers',
     'components' => [
+        'request' => [
+            'enableCookieValidation' => false,
+        ],  
 //        'response' => [
 //            'formatters' => [
 //                'encode' => 'common\components\EncodeFormatter',
